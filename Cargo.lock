@@ -64,14 +64,14 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "cranelift-bforest"
-version = "0.103.0"
+version = "0.102.0"
 dependencies = [
  "cranelift-entity",
 ]
 
 [[package]]
 name = "cranelift-codegen"
-version = "0.103.0"
+version = "0.102.0"
 dependencies = [
  "bumpalo",
  "cranelift-bforest",
@@ -90,25 +90,25 @@ dependencies = [
 
 [[package]]
 name = "cranelift-codegen-meta"
-version = "0.103.0"
+version = "0.102.0"
 dependencies = [
  "cranelift-codegen-shared",
 ]
 
 [[package]]
 name = "cranelift-codegen-shared"
-version = "0.103.0"
+version = "0.102.0"
 
 [[package]]
 name = "cranelift-control"
-version = "0.103.0"
+version = "0.102.0"
 dependencies = [
  "arbitrary",
 ]
 
 [[package]]
 name = "cranelift-entity"
-version = "0.103.0"
+version = "0.102.0"
 dependencies = [
  "serde",
  "serde_derive",
@@ -116,7 +116,7 @@ dependencies = [
 
 [[package]]
 name = "cranelift-frontend"
-version = "0.103.0"
+version = "0.102.0"
 dependencies = [
  "cranelift-codegen",
  "log",
@@ -126,11 +126,11 @@ dependencies = [
 
 [[package]]
 name = "cranelift-isle"
-version = "0.103.0"
+version = "0.102.0"
 
 [[package]]
 name = "cranelift-native"
-version = "0.103.0"
+version = "0.102.0"
 dependencies = [
  "cranelift-codegen",
  "libc",
@@ -139,7 +139,7 @@ dependencies = [
 
 [[package]]
 name = "cranelift-wasm"
-version = "0.103.0"
+version = "0.102.0"
 dependencies = [
  "cranelift-codegen",
  "cranelift-entity",
@@ -493,7 +493,7 @@ dependencies = [
 
 [[package]]
 name = "wasmtime"
-version = "16.0.0"
+version = "15.0.0"
 dependencies = [
  "anyhow",
  "bincode",
@@ -520,7 +520,7 @@ dependencies = [
 
 [[package]]
 name = "wasmtime-cranelift"
-version = "16.0.0"
+version = "15.0.0"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -543,7 +543,7 @@ dependencies = [
 
 [[package]]
 name = "wasmtime-cranelift-shared"
-version = "16.0.0"
+version = "15.0.0"
 dependencies = [
  "anyhow",
  "cranelift-codegen",
@@ -557,7 +557,7 @@ dependencies = [
 
 [[package]]
 name = "wasmtime-environ"
-version = "16.0.0"
+version = "15.0.0"
 dependencies = [
  "anyhow",
  "cranelift-entity",
@@ -582,7 +582,7 @@ dependencies = [
 
 [[package]]
 name = "wasmtime-jit"
-version = "16.0.0"
+version = "15.0.0"
 dependencies = [
  "anyhow",
  "bincode",
@@ -601,7 +601,7 @@ dependencies = [
 
 [[package]]
 name = "wasmtime-jit-icache-coherence"
-version = "16.0.0"
+version = "15.0.0"
 dependencies = [
  "cfg-if",
  "libc",
@@ -610,7 +610,7 @@ dependencies = [
 
 [[package]]
 name = "wasmtime-types"
-version = "16.0.0"
+version = "15.0.0"
 dependencies = [
  "cranelift-entity",
  "serde",
@@ -621,7 +621,7 @@ dependencies = [
 
 [[package]]
 name = "wasmtime-versioned-export-macros"
-version = "16.0.0"
+version = "15.0.0"
 dependencies = [
  "proc-macro2",
  "quote",

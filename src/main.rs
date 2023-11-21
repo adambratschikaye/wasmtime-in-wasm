@@ -1,8 +1,14 @@
 use wasmtime::*;
 
-fn main() -> wasmtime::Result<()> {
+fn main() {
+    let mut config = Config::new();
+    config
+        .target("x86_64-unknown-linux-gnu")
+        .unwrap()
+        .static_memory_maximum_size(0x1_0000 * 64 * 1024)
+        .static_memory_guard_size(2147483648);
     // Modules can be compiled through either the text or binary format
-    let engine = Engine::default();
+    let engine = Engine::new(&config).unwrap();
     let wat = r#"
         (module
             (import "host" "host_func" (func $host_hello (param i32)))
@@ -12,26 +18,8 @@ fn main() -> wasmtime::Result<()> {
                 call $host_hello)
         )
     "#;
-    engine.precompile_module(wat.as_bytes())?;
-    // let module = Module::new(&engine, wat)?;
+    let result = engine.precompile_module(wat.as_bytes()).unwrap();
 
-    // // All wasm objects operate within the context of a "store". Each
-    // // `Store` has a type parameter to store host-specific data, which in
-    // // this case we're using `4` for.
-    // let mut store = Store::new(&engine, 4);
-    // let host_func = Func::wrap(&mut store, |caller: Caller<'_, u32>, param: i32| {
-    //     println!("Got {} from WebAssembly", param);
-    //     println!("my host state is: {}", caller.data());
-    // });
-
-    // // Instantiation of a module requires specifying its imports and then
-    // // afterwards we can fetch exports by name, as well as asserting the
-    // // type signature of the function with `get_typed_func`.
-    // let instance = Instance::new(&mut store, &module, &[host_func.into()])?;
-    // let hello = instance.get_typed_func::<(), ()>(&mut store, "hello")?;
-
-    // // And finally we can call the wasm!
-    // hello.call(&mut store, ())?;
-
-    Ok(())
+    std::fs::write("serialized_module", &result).unwrap();
+    println!("compiled module starts with {:x?}", &result[0..20]);
 }
