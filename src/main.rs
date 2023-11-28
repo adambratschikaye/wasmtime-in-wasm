@@ -6,16 +6,17 @@ use wasmtime_compile::{build_artifacts, build_compiler, CompilerConfig, ModuleVe
 use wasmtime_environ::Tunables;
 
 fn main() {
-    let wat = r#"
-        (module
-            (import "host" "host_func" (func $host_hello (param i32)))
+    let wat = std::fs::read("input.wat").unwrap();
+    // let wat = r#"
+    //     (module
+    //         (import "host" "host_func" (func $host_hello (param i32)))
 
-            (func (export "hello")
-                i32.const 3
-                call $host_hello)
-        )
-    "#;
-    let wasm = wat::parse_str(wat).unwrap();
+    //         (func (export "hello")
+    //             i32.const 3
+    //             call $host_hello)
+    //     )
+    // "#;
+    let wasm = wat::parse_bytes(&wat).unwrap();
 
     let mut initial_compiler_config = CompilerConfig::default();
     initial_compiler_config.target = Some(Triple::from_str("x86_64-unknown-linux-gnu").unwrap());
