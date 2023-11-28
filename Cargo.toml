@@ -11,3 +11,10 @@ wasmtime-environ = { path = "../../wasmtime/crates/environ" }
 wasmparser = "0.116.1"
 wat = "1.0.80"
 target-lexicon = { version = "0.12.12", default-features = false }
+
+[target.'cfg(target_arch = "x86_64")'.dependencies]
+wasmtime = "15.0.0"
+
+[[bin]]
+name = "run"
+path = "src/run.rs"

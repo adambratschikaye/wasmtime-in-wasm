@@ -7,15 +7,6 @@ use wasmtime_environ::Tunables;
 
 fn main() {
     let wat = std::fs::read("input.wat").unwrap();
-    // let wat = r#"
-    //     (module
-    //         (import "host" "host_func" (func $host_hello (param i32)))
-
-    //         (func (export "hello")
-    //             i32.const 3
-    //             call $host_hello)
-    //     )
-    // "#;
     let wasm = wat::parse_bytes(&wat).unwrap();
 
     let mut initial_compiler_config = CompilerConfig::default();
@@ -23,7 +14,9 @@ fn main() {
     let mut tunables = Tunables::default();
     tunables.static_memory_bound = 0x1_0000;
     tunables.static_memory_offset_guard_size = 2147483648;
-    let features = WasmFeatures::default();
+    tunables.parse_wasm_debuginfo = false;
+    let mut features = WasmFeatures::default();
+    features.tail_call = false;
     let module_version = ModuleVersionStrategy::WasmtimeVersion;
     let (_, compiler) = build_compiler(initial_compiler_config, &tunables, features, None).unwrap();
 
@@ -37,6 +30,6 @@ fn main() {
     )
     .unwrap();
 
-    std::fs::write("serialized_module", &result).unwrap();
+    std::fs::write("serialized_module.cwasm", &result).unwrap();
     println!("compiled module starts with {:x?}", &result[0..20]);
 }
