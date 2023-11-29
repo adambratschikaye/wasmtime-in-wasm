@@ -26,4 +26,15 @@ fn main() {
     let result = main.call(&mut store, ()).unwrap();
     assert_eq!(result, 0);
     println!("Compilation within wasmtime took {:?}", start.elapsed());
+
+    let start = Instant::now();
+    compile_native();
+    println!("Compilation natively took {:?}", start.elapsed());
+}
+
+fn compile_native() {
+    let wat = std::fs::read("input.wat").unwrap();
+    let engine = Engine::default();
+    let result = engine.precompile_module(&wat).unwrap();
+    std::fs::write("serialized_module_native.cwasm", &result).unwrap();
 }
