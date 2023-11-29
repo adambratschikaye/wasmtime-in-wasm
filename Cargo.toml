@@ -14,7 +14,12 @@ target-lexicon = { version = "0.12.12", default-features = false }
 
 [target.'cfg(target_arch = "x86_64")'.dependencies]
 wasmtime = "15.0.0"
+wasmtime-wasi = "15.0.0"
 
 [[bin]]
 name = "run"
 path = "src/run.rs"
+
+[[bin]]
+name = "compare-compilation"
+path = "src/compare_compilation.rs"
