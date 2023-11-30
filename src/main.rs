@@ -11,6 +11,9 @@ fn main() {
 
     let mut initial_compiler_config = CompilerConfig::default();
     initial_compiler_config.target = Some(Triple::from_str("x86_64-unknown-linux-gnu").unwrap());
+    initial_compiler_config
+        .settings
+        .insert("opt_level".to_string(), "none".to_string());
     let mut tunables = Tunables::default();
     tunables.static_memory_bound = 0x1_0000;
     tunables.static_memory_offset_guard_size = 2147483648;

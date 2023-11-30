@@ -36,7 +36,12 @@ mod go {
     fn compile_native() {
         let wat = std::fs::read("input.wat").unwrap();
         // let engine = Engine::default();
-        let engine = Engine::new(Config::default().parallel_compilation(false)).unwrap();
+        let engine = Engine::new(
+            Config::default()
+                // .parallel_compilation(false)
+                .cranelift_opt_level(wasmtime::OptLevel::None),
+        )
+        .unwrap();
         let result = engine.precompile_module(&wat).unwrap();
         std::fs::write("serialized_module_native.cwasm", &result).unwrap();
     }
