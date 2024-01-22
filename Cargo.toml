@@ -6,15 +6,20 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-wasmtime-compile = { path = "../../wasmtime/crates/compile" }
 wasmtime-environ = { path = "../../wasmtime/crates/environ" }
 wasmparser = "0.116.1"
 wat = "1.0.80"
 target-lexicon = { version = "0.12.12", default-features = false }
 
 [target.'cfg(target_arch = "x86_64")'.dependencies]
-wasmtime = "15.0.0"
-wasmtime-wasi = "15.0.0"
+wasmtime = { path = "../../wasmtime/crates/wasmtime" }
+wasmtime-wasi = { path = "../../wasmtime/crates/wasi" }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasmtime = { path = "../../wasmtime/crates/wasmtime", default-features = false, features = [
+	'cranelift',
+	'all-arch',
+] }
 
 [[bin]]
 name = "run"
